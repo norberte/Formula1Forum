@@ -1,0 +1,109 @@
+body{
+	font-family: Tahoma, Helvetica, sans-serif;
+}
+p, body {
+	font-size: 0.9em;
+}
+
+footer{
+	color: white;
+	background-color: #474747;
+	height: 200px;
+	padding-top: 0.7em;
+	padding-left: 0.7em;
+	padding-right: 3em;
+}
+
+.menu {
+	padding: 10px;
+	border-radius: 10px;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0)); /* Chrome,Safari4+ */
+	background: linear-gradient(to bottom,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
+
+}	
+ 
+.menu ul {
+	list-style-type: none;
+	padding: 0px;
+	margin:0px;
+}
+ 
+.menu ul li {
+	display: inline;
+}
+ 
+.menu ul li a{
+	text-decoration: none;
+	text-shadow: 0px 1px 3px black;
+	color: white;
+	padding: 5px 20px;
+	font-family: "Trebuchet MS";
+}
+ 
+.menu ul li:not(:last-child) {
+	border-right: 1px dotted #05abe0;
+}
+ 
+.menu ul li a:hover{
+	text-shadow: 0px 1px 10px white;
+	color: #F8F8F8 ;
+}
+
+.already {
+  display:block;
+  text-align:center;
+  font-size:12px;
+  color:#6f7a85;
+  opacity:0.9;
+  text-decoration:none;
+}
+
+.primaryButton:active {
+  transform:translateY(1px);
+}
+
+.primaryButton:hover, .primaryButton:active {
+  background:#eb3b60;
+}
+
+.primaryButton {
+  background:#f4476b;
+  border:none;
+  border-radius:4px;
+  padding:11px;
+  box-shadow:none;
+  margin-top:35px;
+  text-shadow:none;
+  outline:none;
+}
+
+.checkbox {
+  font-size:13px;
+  line-height:20px;
+}
+
+.formControl {
+  background:#f7f9fc;
+  border:none;
+  border-bottom:1px solid #dfe7f1;
+  border-radius:0;
+  box-shadow:none;
+  outline:none;
+  color:inherit;
+  text-indent:6px;
+  height:40px;
+}
+
+h2 {
+  font-size:24px;
+  line-height:1.5;
+  margin-bottom:30px;
+}
+
+form {
+  display:table-cell;
+  width:400px;
+  background-color:#ffffff;
+  padding:40px 60px;
+  color:#505e6c;
+}

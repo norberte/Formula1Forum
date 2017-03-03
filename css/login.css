@@ -1,0 +1,68 @@
+.login {
+  background:#f1f7fc;
+  padding:80px 0;
+}
+
+.login form {
+  max-width:320px;
+  width:90%;
+  margin:0 auto;
+  background-color:#ffffff;
+  padding:40px;
+  border-radius:4px;
+  color:#505e6c;
+  box-shadow:1px 1px 5px rgba(0,0,0,0.1);
+}
+
+.illustration {
+  text-align:center;
+  padding:0 0 20px;
+  font-size:100px;
+  color:rgb(244,71,107);
+}
+
+.primaryButton:active {
+  transform:translateY(1px);
+}
+
+.primaryButton:hover, .primaryButton:active {
+  background:#eb3b60;
+}
+
+.primaryButton {
+  background:#f4476b;
+  border:none;
+  border-radius:4px;
+  padding:11px;
+  box-shadow:none;
+  margin-top:35px;
+  text-shadow:none;
+  outline:none;
+}
+
+.formControl {
+  background:#f7f9fc;
+  border:none;
+  border-bottom:1px solid #dfe7f1;
+  border-radius:0;
+  box-shadow:none;
+  outline:none;
+  color:inherit;
+  text-indent:6px;
+  height:40px;
+}
+
+.forgot {
+  display:block;
+  text-align:center;
+  font-size:12px;
+  color:#6f7a85;
+  opacity:0.9;
+  text-decoration:none;
+}
+
+.forgot:hover, .forgot:active {
+  opacity:1;
+  text-decoration:none;
+}
+
