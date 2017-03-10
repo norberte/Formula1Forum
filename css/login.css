@@ -1,5 +1,4 @@
 .login {
-  background:#f1f7fc;
   padding:80px 0;
 }
 
@@ -7,11 +6,32 @@
   max-width:320px;
   width:90%;
   margin:0 auto;
-  background-color:#ffffff;
+  background-color:#e3ecfc;
   padding:40px;
   border-radius:4px;
   color:#505e6c;
   box-shadow:1px 1px 5px rgba(0,0,0,0.1);
+}
+
+.highlight{
+	background-color:red;
+	border:none;
+	border-bottom:1px solid #dfe7f1;
+	border-radius:0;
+	box-shadow:none;
+	outline:none;
+	color:inherit;
+	text-indent:6px;
+	height:40px;
+	width: 29em;
+}
+
+.pageHeader div{
+	display: inline;
+}
+.pageHeader h1{
+    font-size: 2.5rem;
+    font-weight: 900;
 }
 
 .illustration {
@@ -41,7 +61,7 @@
 }
 
 .formControl {
-  background:#f7f9fc;
+  background:#c0eded;
   border:none;
   border-bottom:1px solid #dfe7f1;
   border-radius:0;
@@ -50,6 +70,7 @@
   color:inherit;
   text-indent:6px;
   height:40px;
+  width: 29em;
 }
 
 .forgot {
@@ -64,5 +85,13 @@
 .forgot:hover, .forgot:active {
   opacity:1;
   text-decoration:none;
+}
+
+.copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:0;
 }
 

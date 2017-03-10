@@ -1,19 +1,14 @@
-.createPost {
-  background:#f1f7fc;
-  padding:80px 0;
+.createPost{
+	margin-left: 28em;
+	width: 25em;
+	border: solid 1px black;
 }
 
-@media (max-width:767px) {
-  .createPost {
-    padding:20px 0;
-  }
-}
-
-form {
-  max-width:480px;
+.createPost form {
+  max-width:320px;
   width:90%;
   margin:0 auto;
-  background-color:#ffffff;
+  background-color:#e3ecfc;
   padding:40px;
   border-radius:4px;
   color:#505e6c;
@@ -43,6 +38,17 @@ h2 {
   color:inherit;
   padding-left:12px;
   height:42px;
+  width: 20em;
+}
+
+.formControl2 {
+  background:#fff;
+  border:1px solid #d4d4d4;
+  border-radius:2px;
+  box-shadow:1px 1px 1px rgba(0,0,0,0.05);
+  outline:none;
+  color:inherit;
+  padding-left:12px;
 }
 
 .formControl:focus {
@@ -67,4 +73,14 @@ h2 {
   text-shadow:none;
   outline:none;
 }
+
+.copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:0;
+}
+
+
 

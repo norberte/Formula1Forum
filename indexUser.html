@@ -3,10 +3,8 @@
 <head lang="en">
    <meta charset="utf-8">
    <title>Formula 1 Talk</title>
-   <link rel="stylesheet" href="css/nav.css"/>
    <link rel="stylesheet" href="css/index.css"/>
-   <link rel="stylesheet" href="css/signUp.css"/>
-   <script type="text/javascript" src="js/signUp.js"></script>
+   <link rel="stylesheet" href="css/nav.css"/>
 </head>
 <body>
 <div id="body_wrapper">
@@ -18,9 +16,9 @@
 	<div class="menu">
 		<nav>
 			<ul>
-				<li><a href="index.html">View All Posts</a></li>
-				<li><a href="signUp.html">Create Account</a></li>
-				<li><a href="login.html">Log-in</a></li>
+				<li><a href="indexUser.html">View All Posts</a></li>
+				<li><a href="createPost.html">Create Posts</a></li>
+				<li><a href="logOut.html">Log out</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -34,36 +32,67 @@
     <!-- Start of Center Column -->
     <div id="centercolumn">
       <div id="centercolumn_2">
-        <div id="main">
-			<form id="signUpForm" method="post" action="somePhpFileLater.php">
-				<h2>Create an account.</h2>
-				<div>
-					<input class="formControl" type="email" id = "email" name="email" placeholder="Email">
+        <!-- Start of News Box 1 -->
+        <div class="post">
+          <div class="post_header">
+            <!-- News Title -->
+            <h1>Title: Placeholder</h2>
+            <!-- News Date -->
+            <strong>Date: mm/dd/yy </strong>
+            <div class="clearthis">&nbsp;</div>
+          </div>
+          <div class="post_content">
+            <!-- News Text -->
+            <h2> Posted By: Username </h2>
+            <h2> Content Placeholder </h2>
+		  </div>
+		  <div class="post_content">
+				<!-- News Text -->
+				<div class="post_comments">
+					<p> Commenter #1: Bla Bla Bla</p>
+					<p> Commenter #2: Bla Bla Bla</p>
 				</div>
-				<div>
-					<input class="formControl" type="password" id = "password" name="password" placeholder="Password">
+				<form id = "commentArea" method="post" action="somePhpFileLater.php" style="overflow:auto">
+					<fieldset>
+						<h2>Comment here</h2>
+						<textarea class="newComment" rows="5" cols="110" name="comment"></textarea>
+						<input input class="primaryButton" type = "submit">
+					</fieldset>
+				</form>
+		  </div>
+        </div>
+        <!-- End of News Box 1 -->
+        <!-- Start of News Box 2 -->
+        <div class="post">
+          <div class="post_header">
+            <!-- News Title -->
+            <h1>Title: Placeholder</h2>
+            <!-- News Date -->
+            <strong>Date: mm/dd/yy </strong>
+            <div class="clearthis">&nbsp;</div>
+          </div>
+          <div class="post_content">
+            <!-- News Text -->
+            <h2> Posted By: Username </h2>
+            <h2> Content Placeholder </h2>
+		  </div>
+		  <div class="post_content">
+				<!-- News Text -->
+				<div class="post_comments">
+					<p> Commenter #1: Bla Bla Bla</p>
+					<p> Commenter #2: Bla Bla Bla</p>
 				</div>
-				<div>
-					<input class="formControl" type="password" id = "password-repeat" name="password-repeat" placeholder="Password (repeat)">
-				</div>
-				<div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" id = "license">I agree to the license terms.
-						</label>
-					</div>
-				</div>
-				<div>
-					<input class="primaryButton" type="submit" value="Sign Up">
-				</div>
-				<a href="logIn.html" class="already">You already have an account? Login here.</a>
-			</form>
-		</div>
+				<form id = "commentArea" method="post" action="somePhpFileLater.php" style="overflow:auto">
+					<fieldset>
+						<h2>Comment here</h2>
+						<textarea class="newComment" rows="5" cols="110" name="comment"></textarea>
+						<input class="primaryButton" type="submit">
+					</fieldset>
+				</form>
+		  </div>
+        </div>
         <!-- End of News Box 2 -->
       </div>
-	  <footer>
-			<p class="copyright">&copy; Copyright 2017 Norbert Eke</p>
-		</footer>
     </div>
     <!-- End of Center Column -->
     <!-- Start of Right Sidebar -->
@@ -122,16 +151,16 @@
       <div id="latestmatch">
         <h2><span>Discussion Topics:</h2></span>
 		<ul>
-			<li><a href="http://www.mercedesamgf1.com">Mercedes AMG Petronas</a></li>
-			<li><a href="http://www.redbullracing.com">Reb Bull Tag-Hauer</a></li>
-			<li><a href="http://www.formula1.ferrari.com/en/">Scuderia Ferrari</a></li>
-			<li><a href="http://www.forceindiaf1.com">Force India Mercedes</a></li>
-			<li><a href="http://www.williamsf1.com">Williams Mercedes</a></li>
-			<li><a href="http://www.mclaren.com/formula1/">McLaren Honda</a></li>
-			<li><a href="http://www.scuderiatororosso.com">Toro Rosso Ferrari</a></li>
-			<li><a href="http://www.haasf1team.com/">Haas GP</a></li>
-			<li><a href="http://www.scuderiatororosso.com">Sauber Ferrari</a></li>
-			<li><a href="http://www.renaultsport.com">Renault</a></li>
+			<li><a href="#merdedes">Mercedes AMG Petronas</a></li>
+			<li><a href="#redbull">Reb Bull Tag-Hauer</a></li>
+			<li><a href="#ferrari">Scuderia Ferrari</a></li>
+			<li><a href="#forceindia">Force India Mercedes</a></li>
+			<li><a href="#williams">Williams Mercedes</a></li>
+			<li><a href="#mclaren">McLarren Honda</a></li>
+			<li><a href="#tororosso">Toro Rosso Ferrari</a></li>
+			<li><a href="#haas">Haas GP</a></li>
+			<li><a href="#sauber">Sauber Ferrari</a></li>
+			<li><a href="#renault">Renault</a></li>
 		</ul>
         <div class="clearthis">&nbsp;</div>
       </div>

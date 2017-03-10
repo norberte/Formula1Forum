@@ -57,6 +57,20 @@ footer{
   color:inherit;
   text-indent:6px;
   height:40px;
+  width: 20em;
+}
+
+.highlight{
+	background-color:red;
+	border:none;
+	border-bottom:1px solid #dfe7f1;
+	border-radius:0;
+	box-shadow:none;
+	outline:none;
+	color:inherit;
+	text-indent:6px;
+	height:40px;
+	width: 29em;
 }
 
 h2 {
@@ -65,10 +79,16 @@ h2 {
   margin-bottom:30px;
 }
 
-form {
+#main{
+	margin-left: 20em;
+	width: 25em;
+	border: solid 1px black;
+}
+
+#main form {
   display:table-cell;
   width:400px;
-  background-color:#ffffff;
+  background-color: #53cbf1;
   padding:40px 60px;
   color:#505e6c;
 }

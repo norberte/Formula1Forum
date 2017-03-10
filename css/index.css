@@ -29,6 +29,10 @@ img {
 	border: none;
 }
 
+h1{
+	padding: 3px 0px px;
+}
+
 ul {
 	list-style-type: none;
 }
@@ -38,15 +42,33 @@ li {
 }
 
 p {
-	padding: 5px 0px 5px;
-	text-align: justify;
+	padding: 2px 0px 2px;
 }
 
 input {
-	border: 0px;
+	border: 1px;
 	font-family: verdana, arial, sans-serif;
 	font-size: 11px;
 }
+
+.primaryButton:active {
+  transform:translateY(1px);
+}
+
+.primaryButton:hover, .primaryButton:active {
+  background:#eb3b60;
+}
+
+.primaryButton {
+  background:#f4476b;
+  border:none;
+  border-radius:4px;
+  padding:11px;
+  box-shadow:none;
+  text-shadow:none;
+  outline:none;
+}
+
 
 .clearthis {
 	margin : 0px;
@@ -71,16 +93,17 @@ input {
 
 /* Center Column */
 #centercolumn {
-	width: 1000px;
+	width: 950px;
+	margin-right:5em;
 	color: #333;
-	background-color: #fff;
+	background-color: linear-gradient(to bottom,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
 	float: left;
 	text-align: center;
 }
 
 #centercolumn_2 {
 	margin: 8px auto;
-	width: 1000px;
+	width: 950px;
 	text-align: left;
 }
 
@@ -96,8 +119,8 @@ input {
 /* Center Column Posts */
 .post {
 	margin-bottom: 5px;
-	width: 1000px;
 	border: solid black 2px;
+	background-color: #fff;
 }
 
 .post_header {
@@ -107,7 +130,7 @@ input {
 
 .post_header h2 {
 	padding-left: 20px;
-	width: 1000px;
+	margin-right: 5em;
 	float: left;
 	font-size: 10px;
 	font-weight: bold;
@@ -118,21 +141,17 @@ input {
 }
 
 .post_content {
-	padding: 0px 10px 20px 10px;
+	padding: 0px 10px 0px 10px;
 	margin-left:30px;
-	margin-bottom: 20px;
-	width: 900px;
+	margin-bottom: 10px;
+	margin-right: 30px;
 	line-height: 30px;
 	border: solid red 2px;
 }
-
-.post_comments a {
-	text-decoration: none;
-}
-
-.post_comments a:hover {
-	color: #959595;
-	background-color: inherit;
+.post_comments{
+	margin: 10px 5px 10px 5px;
+	line-height: 20px;
+	border: solid blue 1px;
 }
 
 /* Right Sidebar */
@@ -145,46 +164,33 @@ input {
 }
 
 /* Team Roster */
-#teamroster {
+#driver_roster {
 	margin-bottom: 9px;
 	width: 209px;
 	background: url('../img/teamroster_bg.jpg') repeat-y;
 }
 
-#teamroster_header {
+#drivers_header{
 	padding: 17px 7px 0px;
 	background: url('../img/teamroster_bg_top.jpg') no-repeat 0% 0%;
 }
 
-#teamroster h2 {
+#driver_roster h2 {
 	height: 35px;
 	background: url('../img/teamroster_title.jpg') no-repeat 0% 0%;
 }
 
-#teamroster_content {
+#drivers_content {
 	padding: 0px 7px 10px;
 	background: url('../img/teamroster_bg_bot.jpg') no-repeat 0% 100%;
 }
 
-#teamroster_categories {
-	padding: 0px 7px 10px;
-	font-weight: bold;
-}
-
-#teamroster_categories a {
-	text-decoration: none;
-}
-
-#teamroster_categories a:hover {
-	text-decoration: underline
-}
-
-#teamroster ul {
+#driver_roster ul {
 	padding-left: 1px;
 	padding-right: 1px;
 }
 
-#teamroster li {
+#driver_roster li {
 	color: #a71b1f;
 	background-color: #a71a1e;
 	background-repeat: no-repeat;
@@ -194,53 +200,101 @@ input {
 	float: left;
 }
 
-#teamroster li a {
+#driver_roster li a {
 	display: block;
 	margin-top: 50px;
 	width: 94px;
-	height: 25px;
+	height: 10px;
 	color: #a71b1f;
 	background: #ffe0e2 url('../img/teamroster_name_bg.jpg') no-repeat;
 	overflow: hidden;
-	line-height: 23px;
+	line-height: 10px;
 	text-decoration: none;
 }
 
-#teamroster li a:hover {
+#driver_roster li a:hover {
 	color: #380100;
 	background-color: inherit;
 }
 
-li#roster_twitch {
-	background-image: url('../img/teamroster_tb01.jpg');
+li#hamilton {
+	background-image: url('../img/hamilton.jpg');
 }
 
-li#roster_rock {
-	background-image: url('../img/teamroster_tb02.jpg');
+li#kimi{
+	background-image: url('../img/raikonnen.jpg');
 }
 
-li#roster_badkarma {
-	background-image: url('../img/teamroster_tb03.jpg');
+li#bottas {
+	background-image: url('../img/bottas.jpg');
 }
 
-li#roster_mostly {
-	background-image: url('../img/teamroster_tb04.jpg');
+li#vettel {
+	background-image: url('../img/vettel.jpg');
 }
 
-li#roster_thebowl {
-	background-image: url('../img/teamroster_tb05.jpg');
+li#perez {
+	background-image: url('../img/perez.jpg');
 }
 
-li#roster_doggerz {
-	background-image: url('../img/teamroster_tb06.jpg');
+li#ocon{
+	background-image: url('../img/ocon.jpg');
 }
 
-li#roster_drew {
-	background-image: url('../img/teamroster_tb07.jpg');
+li#massa {
+	background-image: url('../img/massa.jpg');
 }
 
-li#roster_nogusta {
-	background-image: url('../img/teamroster_tb08.jpg');
+li#stroll {
+	background-image: url('../img/stroll.jpg');
+}
+
+li#palmer {
+	background-image: url('../img/palmer.jpg');
+}
+
+li#hulkenberg{
+	background-image: url('../img/hulkenberg.jpg');
+}
+
+li#alonso {
+	background-image: url('../img/alonso.jpg');
+}
+
+li#vandoorne {
+	background-image: url('../img/vandoorne.jpg');
+}
+
+li#sainz {
+	background-image: url('../img/sainz.jpg');
+}
+
+li#kvyat{
+	background-image: url('../img/kvyat.jpg');
+}
+
+li#wehrlein {
+	background-image: url('../img/wehrlein.jpg');
+}
+
+li#ericcson {
+	background-image: url('../img/ericcson.jpg');
+}
+
+li#grosjean {
+	background-image: url('../img/grosjean.jpg');
+}
+
+li#magnussen {
+	background-image: url('../img/magnussen.jpg');
+}
+
+li#verstappen {
+	background-image: url('../img/verstappen.jpg');
+}
+
+li#ricciardo {
+	background-image: url('../img/ricciardo.jpg');
 }
 
 /* Left Column and Sidebar */
