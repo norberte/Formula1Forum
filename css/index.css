@@ -148,10 +148,25 @@ input {
 	line-height: 30px;
 	border: solid red 2px;
 }
+
+.post_detail{
+	padding: 0px 10px 0px 10px;
+	margin-left:30px;
+	margin-bottom: 10px;
+	margin-right: 30px;
+}
+
+.post_detail strong {
+	float: right;
+}
+
 .post_comments{
-	margin: 10px 5px 10px 5px;
-	line-height: 20px;
-	border: solid blue 1px;
+	padding: 0px 10px 0px 10px;
+	margin-left:30px;
+	margin-bottom: 10px;
+	margin-right: 30px;
+	line-height: 30px;
+	border: solib blue 1px;
 }
 
 /* Right Sidebar */
