@@ -59,12 +59,21 @@
 					exit("<p>Unable to connect to database</p>". $error);
 				} else {
 						if ($_SERVER["REQUEST_METHOD"] == "POST"){
-							$postIDs = array();
-							$keyword = mysqli_real_escape_string($connection, $_POST['keyword']);	// sanitize the input
-							$sql = "SELECT postID FROM posts WHERE title LIKE '%".$keyword."%' OR message LIKE '%".$keyword."%'";
-							$results = mysqli_query($connection, $sql);
-							while ($row = mysqli_fetch_assoc($results)){
-								array_push($postIDs,$row['postID']);
+							try{
+								$postIDs = array();
+								$topic = $_POST['topic'];
+								$sql = "SELECT postID FROM posts WHERE topic = ?";
+								$conn = new PDO("mysql:host=cosc360.ok.ubc.ca;dbname=db_28723147", DBUSER, DBPASS);
+								$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+								$stmt = $conn->prepare($sql);
+								$stmt->bindValue(1, $topic);
+								$stmt->execute();
+								while($row = $stmt->fetch()){
+									array_push($postIDs,$row['postID']);
+								}
+								$conn = null;
+							} catch(PDOException $e){
+								die($e->getMessage());
 							}
 							
 							foreach($postIDs as $id){
@@ -87,7 +96,7 @@
 								} catch(PDOException $e){
 									die($e->getMessage());
 								}
-							?>
+							  ?>
 								<div class="post">
 								  <div class="post_header">
 									<h1>Title: <?php echo $title ?></h1>
@@ -193,16 +202,17 @@
 	  <div id="leftcolumn">
 		<!-- Start of Left Sidebar -->
 		<div id="leftsidebar">
-		  <h2>Search for keywords in posts:</h2>
-			  <div class="search">
-					<form method="post" action="processSearch.php">
-						<fieldset>
-							<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
-						</fieldset>
-					</form>
-					<br></br>
-			  </div>
-			  <br>
+		  <h3>Search: </h3>
+		  
+		  <div class="search">
+				<form method="post" action="processSearch.php">
+					<fieldset>
+						<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
+					</fieldset>
+				</form>
+				<br></br>
+		  </div>
+		  <br>
 			  <h2>Search for topic:</h2>
 			  <div class="search">
 					<form method="post" action="processTopicSearch.php">
@@ -214,39 +224,39 @@
 			  </div>
 		  <!-- Start of Latest Matches -->
 		  <div id="latestmatch">
-					<br>
-					<h1 style="text-align:center;">Hot Threads:</h1>
-					<br>
-					<ul>
-						<?php
-							define('DBHOST', 'cosc360.ok.ubc.ca');
-							define('DBNAME', 'db_28723147');
-							define('DBUSER', '28723147');
-							define('DBPASS', '28723147');
+			<br>
+			<h1 style="text-align:center;">Hot Threads:</h1>
+			<br>
+			<ul>
+				<?php
+					define('DBHOST', 'cosc360.ok.ubc.ca');
+					define('DBNAME', 'db_28723147');
+					define('DBUSER', '28723147');
+					define('DBPASS', '28723147');
 
-							$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-							$error = mysqli_connect_error();
-							if($error != null){
-								exit("<p>Unable to connect to database</p>". $error);
-							} else {
-								$sql = "SELECT topic, COUNT(commentID) FROM posts, comments WHERE posts.postID = comments.postID GROUP BY comments.postID ORDER BY COUNT(commentID) DESC LIMIT 10;";
-								$results = mysqli_query($connection, $sql);
-								while ($row = mysqli_fetch_assoc($results)){
-									?>
-									<li>
-										<form method="post" action="processTopicSearch.php">
-											<input type="hidden" name="topic" value="<?php echo $row['topic']?>" /> 
-											<input type="submit" value="<?php echo $row['topic']?>" />
-										</form>
-									</li>
-									<?php
-								}
-							}
-							mysqli_close($connection); 
-						?>
-					</ul>
-					<div class="clearthis">&nbsp;</div>
-				</div>
+					$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+					$error = mysqli_connect_error();
+					if($error != null){
+						exit("<p>Unable to connect to database</p>". $error);
+					} else {
+						$sql = "SELECT topic, COUNT(commentID) FROM posts, comments WHERE posts.postID = comments.postID GROUP BY comments.postID ORDER BY COUNT(commentID) DESC LIMIT 10;";
+						$results = mysqli_query($connection, $sql);
+						while ($row = mysqli_fetch_assoc($results)){
+							?>
+							<li>
+								<form method="post" action="processTopicSearch.php">
+									<input type="hidden" name="topic" value="<?php echo $row['topic']?>" /> 
+									<input type="submit" value="<?php echo $row['topic']?>" />
+								</form>
+							</li>
+							<?php
+						}
+					}
+					mysqli_close($connection); 
+				?>
+			</ul>
+			<div class="clearthis">&nbsp;</div>
+		  </div>
 		  <!-- End of Latest Matches -->
 		</div>
 		<!-- End of Left Sidebar -->

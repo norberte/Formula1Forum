@@ -10,7 +10,7 @@ card a:hover {
 .card {
     background: #ffffff;
     height: 300px;
-    width: 200px;
+    width: 300px;
     position: relative;
     top: 20vh;
     display: block;
@@ -98,7 +98,7 @@ card a:hover {
 }
 
 #stats td {
-    padding: 0.25rem .25em .35rem .5rem;
+    padding: 0.25rem .25em .35rem 0rem;
 }
 
 #stats td:first-child {

@@ -5,6 +5,40 @@
    <title>Formula 1 Talk</title>
    <link rel="stylesheet" href="css/index.css"/>
    <link rel="stylesheet" href="css/nav.css"/>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script>
+		var postID;
+		function getPostID() {
+			return window.postID;
+		}
+		
+		function setPostID(id) {
+			window.postID = id;
+		}
+		
+		function hideCommentArea(){
+			var container = document.getElementById("commentArea");
+			container.style= "overflow:auto; display: none;";
+		}
+		
+		function showCommentArea(){
+			var container = document.getElementById("commentArea");
+			container.style= "overflow:auto; display: inline;";
+		}
+   </script>
+   <script type="text/javascript">
+        function getMessages() {
+           var results = $.post("ajax.php");
+           results.done(function(data) {
+               console.log(data);
+			   document.getElementById("ajaxUpdate").innerHTML = data;
+           });
+           //results.fail(function(jqXHR) {console.log("Error: " + jqXHR.status);});
+           results.always(function() {console.log("done");});
+           setTimeout(getMessages, 1000);//1 sec after last fulfilled request, go again
+        };
+        window.onload = getMessages;
+   </script>
 </head>
 <body>
 <?php
@@ -45,76 +79,70 @@ if (!isset( $_SESSION['username'] ) ){
 		<!-- Start of Center Column -->
 		<div id="centercolumn">
 		  <div id="centercolumn_2">
-		  <?php
-		  define('DBHOST', 'cosc360.ok.ubc.ca');
-		  define('DBNAME', 'db_28723147');
-		  define('DBUSER', '28723147');
-          define('DBPASS', '28723147');
+		  <div id = "ajaxUpdate">
+			<?php
+			define('DBHOST', 'cosc360.ok.ubc.ca');
+			define('DBNAME', 'db_28723147');
+			define('DBUSER', '28723147');
+			define('DBPASS', '28723147');
 
 			$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 			$error = mysqli_connect_error();
-		if($error != null){
-			exit("<p>Unable to connect to database</p>". $error);
-		} else {
-			$sql = "SELECT postID, title, message, topic, timeOfPost, username FROM posts, users WHERE posts.userID = users.userID ORDER BY timeOfPost ASC";
-			$results = mysqli_query($connection, $sql);
-			while ($row = mysqli_fetch_assoc($results)){
-		  ?>
-		  <div class="post">
-			  <div class="post_header">
-				<h1>Title: <?php echo $row['title']?></h1>
-				<strong>Date and Time: <?php echo $row['timeOfPost']?></strong>
-			  </div>
-			  <div class="post_detail">
-				<h1> Posted By: <?php echo $row['username']?> </h1>
-				<strong>Topic: <?php echo $row['topic']?></strong>
-			  </div>
-			  <div class="post_content">
-				<h2> Post: <?php echo $row['message']?> </h2>
-			  </div>
-			  <?php
-			    $postID = $row['postID'];
-				mysqli_close($connection); 
-				try{
-					$conn = new PDO("mysql:host=cosc360.ok.ubc.ca;dbname=db_28723147", DBUSER, DBPASS);
-					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$sql2 = "SELECT username, message, timeOfComment FROM users, comments WHERE comments.userID = users.userID AND postID = ? ORDER BY timeOfComment ASC";
-					$stmt = $conn->prepare($sql2);
-					$stmt->bindValue(1, $postID);
-					$stmt->execute();
-						while ($r = $stmt->fetch()) { 
-						?>
-							<div class="post_comments">
-								<div class="post_header">
-									<h2> Commenter: <?php echo $r['username']?> </h2>
-									<strong>Date and Time: <?php echo $r['timeOfComment']?></strong>
-								</div>
-								<div>
-									<h2>Comment: <?php echo $r['message']?></h2>
-								</div>
-							</div>
-						<?php
+			if($error != null){
+				exit("<p>Unable to connect to database</p>". $error);
+			} else {
+				$sql = "SELECT postID, title, message, topic, timeOfPost, username FROM posts, users WHERE posts.userID = users.userID ORDER BY timeOfPost ASC";
+				$results = mysqli_query($connection, $sql);
+				while ($row = mysqli_fetch_assoc($results)){
+					?>
+				<div class="post">
+					<div class="post_header">
+						<h1>Title: <?php echo $row['title']?></h1>
+					<strong>Date and Time: <?php echo $row['timeOfPost']?></strong>
+					</div>
+					<div class="post_detail">
+						<h1> Posted By: <?php echo $row['username']?> </h1>
+						<strong>Topic: <?php echo $row['topic']?></strong>
+					</div>
+					<div class="post_content">
+						<h2> Post: <?php echo $row['message']?> </h2>
+					</div>
+					<?php
+						$postID = $row['postID'];
+						mysqli_close($connection); 
+						try{
+							$conn = new PDO("mysql:host=cosc360.ok.ubc.ca;dbname=db_28723147", DBUSER, DBPASS);
+							$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+							$sql2 = "SELECT username, message, timeOfComment FROM users, comments WHERE comments.userID = users.userID AND postID = ? ORDER BY timeOfComment ASC";
+							$stmt = $conn->prepare($sql2);
+							$stmt->bindValue(1, $postID);
+							$stmt->execute();
+								while ($r = $stmt->fetch()) { 
+								?>
+									<div class="post_comments">
+										<div class="post_header">
+											<h2> Commenter: <?php echo $r['username']?> </h2>
+											<strong>Date and Time: <?php echo $r['timeOfComment']?></strong>
+										</div>
+										<div>
+											<h2>Comment: <?php echo $r['message']?></h2>
+										</div>
+									</div>
+								<?php
+								}
+							$conn = null;
+						} catch(PDOException $e){
+							die($e->getMessage());
 						}
-				$conn = null;
-				} catch(PDOException $e){
-					die($e->getMessage());
+					?>	
+				</div>
+				<?php
 				}
-				?>	
-				<form id = "commentArea" method="post" action="processComment.php" style="overflow:auto">
-					<fieldset>
-						<h2>Comment here</h2>
-						<textarea class="newComment" rows="5" cols="110" name="comment"></textarea>
-						<input type="hidden" name="postID" value = <?php echo $row['postID'] ?> >
-						<input input class="primaryButton" type = "submit">
-					</fieldset>
-				</form>
-		  </div>
-			<?php
 			}
-		}
-		?>
-		   </div>
-	    </div>
+			?>
+		  </div>
+		 </div>
+	   </div>
 		<!-- End of Center Column -->
 		<!-- Start of Right Sidebar -->
 		<div id="rightsidebar">
@@ -168,52 +196,31 @@ if (!isset( $_SESSION['username'] ) ){
 				</form>
 				<br></br>
 		  </div>
-		  <br>
-			  <h2>Search for topic:</h2>
-			  <div class="search">
-					<form method="post" action="processTopicSearch.php">
-						<fieldset>
-							<input id="searchBar" type="search" name="topic" placeholder="enter topic name"/><input type="submit">
-						</fieldset>
-					</form>
-					<br></br>
-			  </div>
 		  <!-- Start of Latest Matches -->
 		  <div id="latestmatch">
-			<br>
-			<h1 style="text-align:center;">Hot Threads:</h1>
-			<br>
+			<h2><span>Discussion Topics:</h2></span>
 			<ul>
-				<?php
-					define('DBHOST', 'cosc360.ok.ubc.ca');
-					define('DBNAME', 'db_28723147');
-					define('DBUSER', '28723147');
-					define('DBPASS', '28723147');
-
-					$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-					$error = mysqli_connect_error();
-					if($error != null){
-						exit("<p>Unable to connect to database</p>". $error);
-					} else {
-						$sql = "SELECT topic, COUNT(commentID) FROM posts, comments WHERE posts.postID = comments.postID GROUP BY comments.postID ORDER BY COUNT(commentID) DESC LIMIT 10;";
-						$results = mysqli_query($connection, $sql);
-						while ($row = mysqli_fetch_assoc($results)){
-							?>
-							<li>
-								<form method="post" action="processTopicSearch.php">
-									<input type="hidden" name="topic" value="<?php echo $row['topic']?>" /> 
-									<input type="submit" value="<?php echo $row['topic']?>" />
-								</form>
-							</li>
-							<?php
-						}
-					}
-					mysqli_close($connection); 
-				?>
+				<li><a href="#merdedes">Mercedes AMG Petronas</a></li>
+				<li><a href="#redbull">Reb Bull Tag-Hauer</a></li>
+				<li><a href="#ferrari">Scuderia Ferrari</a></li>
+				<li><a href="#forceindia">Force India Mercedes</a></li>
+				<li><a href="#williams">Williams Mercedes</a></li>
+				<li><a href="#mclaren">McLarren Honda</a></li>
+				<li><a href="#tororosso">Toro Rosso Ferrari</a></li>
+				<li><a href="#haas">Haas GP</a></li>
+				<li><a href="#sauber">Sauber Ferrari</a></li>
+				<li><a href="#renault">Renault</a></li>
 			</ul>
 			<div class="clearthis">&nbsp;</div>
 		  </div>
 		  <!-- End of Latest Matches -->
+		  <br></br>
+		  <form id = "commentArea" method="post" action="processComment.php" style="overflow:auto; display: none;">
+				<h1>Type Comment here</h1><br>
+				<textarea class="newComment" rows="10" cols="23" name="comment"></textarea>
+				<input type="hidden" name="postID" value = "getPostID()" >
+				<input input class="primaryButton" type = "submit" onclick="hideCommentArea()">
+		  </form>
 		</div>
 		<!-- End of Left Sidebar -->
 	  </div>

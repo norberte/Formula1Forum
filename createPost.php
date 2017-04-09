@@ -108,33 +108,60 @@ if (!isset( $_SESSION['username'] ) ){
 	  <div id="leftcolumn">
 		<!-- Start of Left Sidebar -->
 		<div id="leftsidebar">
-		  <h3>Search: </h3>
-		  
-		  <div class="search">
-				<form method="post" action="processSearch.php">
-					<fieldset>
-						<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
-					</fieldset>
-				</form>
-				<br></br>
-		  </div>
+		   <h3>Search for keywords in posts:</h3>
+			  <div class="search">
+					<form method="post" action="processSearch.php">
+						<fieldset>
+							<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
+						</fieldset>
+					</form>
+					<br></br>
+			  </div>
+			  <br>
+			  <h3>Search for topic:</h3>
+			  <div class="search">
+					<form method="post" action="processTopicSearch.php">
+						<fieldset>
+							<input id="searchBar" type="search" name="topic" placeholder="enter topic name"/><input type="submit">
+						</fieldset>
+					</form>
+					<br></br>
+			  </div>
 		  <!-- Start of Latest Matches -->
 		  <div id="latestmatch">
-			<h2><span>Discussion Topics:</h2></span>
-			<ul>
-				<li><a href="http://www.mercedesamgf1.com">Mercedes AMG Petronas</a></li>
-				<li><a href="http://www.redbullracing.com">Reb Bull Tag-Hauer</a></li>
-				<li><a href="http://www.formula1.ferrari.com/en/">Scuderia Ferrari</a></li>
-				<li><a href="http://www.forceindiaf1.com">Force India Mercedes</a></li>
-				<li><a href="http://www.williamsf1.com">Williams Mercedes</a></li>
-				<li><a href="http://www.mclaren.com/formula1/">McLaren Honda</a></li>
-				<li><a href="http://www.scuderiatororosso.com">Toro Rosso Ferrari</a></li>
-				<li><a href="http://www.haasf1team.com/">Haas GP</a></li>
-				<li><a href="http://www.scuderiatororosso.com">Sauber Ferrari</a></li>
-				<li><a href="http://www.renaultsport.com">Renault</a></li>
-			</ul>
-			<div class="clearthis">&nbsp;</div>
-		  </div>
+					<br>
+					<h1 style="text-align:center;">Hot Threads:</h1>
+					<br>
+					<ul>
+						<?php
+							define('DBHOST', 'cosc360.ok.ubc.ca');
+							define('DBNAME', 'db_28723147');
+							define('DBUSER', '28723147');
+							define('DBPASS', '28723147');
+
+							$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+							$error = mysqli_connect_error();
+							if($error != null){
+								exit("<p>Unable to connect to database</p>". $error);
+							} else {
+								$sql = "SELECT topic, COUNT(commentID) FROM posts, comments WHERE posts.postID = comments.postID GROUP BY comments.postID ORDER BY COUNT(commentID) DESC LIMIT 10;";
+								$results = mysqli_query($connection, $sql);
+								while ($row = mysqli_fetch_assoc($results)){
+									?>
+									<li>
+										<form method="post" action="processTopicSearch.php">
+											<input type="hidden" name="topic" value="<?php echo $row['topic']?>" /> 
+											<input type="submit" value="<?php echo $row['topic']?>" />
+										</form>
+									</li>
+									<?php
+								}
+							}
+							mysqli_close($connection); 
+						?>
+					</ul>
+					<div class="clearthis">&nbsp;</div>
+				</div>
 		  <!-- End of Latest Matches -->
 		</div>
 		<!-- End of Left Sidebar -->
