@@ -119,16 +119,25 @@ if (!isset( $_SESSION['username'] ) ){
 	  <div id="leftcolumn">
 		<!-- Start of Left Sidebar -->
 		<div id="leftsidebar">
-		  <h3>Search: </h3>
-		  
-		  <div class="search">
-				<form method="post" action="processSearch.php">
-					<fieldset>
-						<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
-					</fieldset>
-				</form>
-				<br></br>
-		  </div>
+		   <h2>Search for keywords in posts:</h2>
+			  <div class="search">
+					<form method="post" action="processSearch.php">
+						<fieldset>
+							<input id="searchBar" type="search" name="keyword" placeholder="enter keyword"/><input type="submit">
+						</fieldset>
+					</form>
+					<br></br>
+			  </div>
+			  <br>
+			  <h2>Search for topic:</h2>
+			  <div class="search">
+					<form method="post" action="processTopicSearch.php">
+						<fieldset>
+							<input id="searchBar" type="search" name="topic" placeholder="enter topic name"/><input type="submit">
+						</fieldset>
+					</form>
+					<br></br>
+			  </div>
 		  <!-- Start of Latest Matches -->
 		  <div id="latestmatch">
 			<h2><span>Discussion Topics:</h2></span>

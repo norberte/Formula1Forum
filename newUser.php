@@ -95,7 +95,7 @@ if($error != null){
 						
 						$imagedata = file_get_contents($_FILES["userImage"]["tmp_name"]); //store the contents of the files in memory in preparation for upload
 						
-						$sql = "INSERT INTO userImages (userID, contentType, image) VALUES(?,?,?)";
+						$sql = "INSERT INTO userimages (userID, contentType, image) VALUES(?,?,?)";
 						$stmt = mysqli_stmt_init($connection); //init prepared statement object
 						mysqli_stmt_prepare($stmt, $sql); // register the query
 
